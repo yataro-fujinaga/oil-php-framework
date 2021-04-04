@@ -5,7 +5,7 @@ namespace App\Database\Model;
 
 use App\Database\Query\Builder;
 
-class Model
+abstract class Model
 {
     /**
      * @var array
@@ -19,12 +19,12 @@ class Model
 
     public function __construct()
     {
-        $this->query = Builder::newQuery('user');
+        $this->query = Builder::newQuery(strtolower(__CLASS__));
     }
 
     public static function where(string $column, string $operator, string $value): static
     {
-        $model = new self;
+        $model = new static();
 
         $model->query->where($column, $operator, $value);
 
@@ -43,7 +43,7 @@ class Model
     final public function all(): array
     {
         return array_map(static function (array $result) {
-            $model = new self();
+            $model = new static();
 
             foreach ($result as $k => $v) {
                 $model->{$k} = $v;
@@ -55,7 +55,7 @@ class Model
 
     public static function create(array $params): void
     {
-        $model = new self();
+        $model = new static();
 
         $model->query->insert($params);
     }
