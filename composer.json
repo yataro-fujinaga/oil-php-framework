@@ -6,6 +6,11 @@
       "Packages\\": "packages/"
     }
   },
-  "name": "oil/oil",
-  "description": "Lightweight web frameworks."
+  "name": "tasteck/oil",
+  "description": "Lightweight web frameworks.",
+  "require": {
+    "ext-pdo": "*",
+    "phpunit/phpunit": "^9.5",
+    "vlucas/phpdotenv": "^5.3"
+  }
 }
