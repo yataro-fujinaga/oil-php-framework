@@ -24,7 +24,7 @@ abstract class Model
 
     public function __construct()
     {
-        $this->query = Builder::newQuery(strtolower(__CLASS__));
+        $this->query = Builder::newQuery($this->className());
     }
 
     public static function where(string $column, string $operator, string $value): static
@@ -83,5 +83,15 @@ abstract class Model
     public function __get(string $name): mixed
     {
         return $this->attributes[$name];
+    }
+
+    /**
+     * @return string
+     */
+    private function className(): string
+    {
+        preg_match('/([^\\\]*?)$/', static::class, $matches);
+
+        return strtolower($matches[1]);
     }
 }
