@@ -70,12 +70,34 @@ class Builder
         return $this->db->fetch($sql, $this->buildParams()) ?: [];
     }
 
+    final public function getAll(): array
+    {
+        $sql = sprintf('SELECT %s FROM %s WHERE %s',
+            $this->buildSelectStatement(),
+            $this->table,
+            $this->buildWhereStatement()
+        );
+
+        return $this->db->fetchAll($sql, $this->buildParams()) ?: [];
+    }
+
+    final public function insert(array $params): void
+    {
+        $sql = sprintf(
+            'INSERT INTO %s SET %s',
+            $this->table,
+            $this->buildStatement($params)
+        );
+
+        $this->db->fetch($sql, $this->buildParams($params));
+    }
+
     final public function update(array $params): void
     {
         $sql = sprintf(
             'UPDATE %s SET %s WHERE %s',
             $this->table,
-            $this->buildUpdateStatement($params),
+            $this->buildStatement($params),
             $this->buildWhereStatement()
         );
 
@@ -111,12 +133,8 @@ class Builder
         return trim($statement, ', ');
     }
 
-    /**
-     * @param array $params
-     *
-     * @return string
-     */
-    private function buildUpdateStatement(array $params): string
+
+    private function buildStatement(array $params): string
     {
         $result = '';
 
@@ -125,7 +143,7 @@ class Builder
                 self::STATEMENT_FORMAT,
                 $key,
                 '=',
-                $this->createUpdatePlaceholder($key)
+                $this->createPlaceholder($key)
             );
             $result .= ', ';
         }
@@ -164,7 +182,7 @@ class Builder
         $updateParams = [];
 
         foreach ($params as $key => $value) {
-            $updateParams[$this->createUpdatePlaceholder($key)] = $value;
+            $updateParams[$this->createPlaceholder($key)] = $value;
         }
 
         return array_merge($whereParams, $updateParams);
@@ -177,17 +195,7 @@ class Builder
      */
     private function createWherePlaceholder(string $key): string
     {
-        return $this->createPlaceholder('w_', $key);
-    }
-
-    /**
-     * @param string $key
-     *
-     * @return string
-     */
-    private function createUpdatePlaceholder(string $key): string
-    {
-        return $this->createPlaceholder('u_', $key);
+        return $this->createPlaceholder($key, 'w_');
     }
 
     /**
@@ -196,7 +204,7 @@ class Builder
      *
      * @return string
      */
-    private function createPlaceholder(string $prefix, string $key): string
+    private function createPlaceholder(string $key, string $prefix = ''): string
     {
         return ':' . $prefix . $key;
     }
