@@ -21,12 +21,9 @@ class Builder
 
     private function __construct()
     {
-        $this->db = new DB([
-            'dsn'      => 'mysql:dbname=sample_db;host=mysql',
-            'user'     => 'root',
-            'password' => 'password',
-            'options'  => []
-        ]);
+        $config = require '../../../config/database.php';
+
+        $this->db = new DB($config);
     }
 
     final public static function newQuery(string $table): self
