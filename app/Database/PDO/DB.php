@@ -7,9 +7,9 @@ use PDO;
 use PDOStatement;
 
 /**
- * Class Connection
+ * Class DB
  *
- * @package App\Http\DatabasePDO
+ * @package App\Database\PDO
  */
 class DB
 {

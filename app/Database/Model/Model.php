@@ -5,6 +5,11 @@ namespace App\Database\Model;
 
 use App\Database\Query\Builder;
 
+/**
+ * Class Model
+ *
+ * @package App\Database\Model
+ */
 abstract class Model
 {
     /**
