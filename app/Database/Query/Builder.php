@@ -136,19 +136,19 @@ class Builder
 
     private function buildStatement(array $params): string
     {
-        $result = '';
+        $statement = '';
 
         foreach ($params as $key => $value) {
-            $result .= sprintf(
+            $statement .= sprintf(
                 self::STATEMENT_FORMAT,
                 $key,
                 '=',
                 $this->createPlaceholder($key)
             );
-            $result .= ', ';
+            $statement .= ', ';
         }
 
-        return trim($result, ', ');
+        return trim($statement, ', ');
     }
 
     /**
@@ -156,10 +156,10 @@ class Builder
      */
     private function buildWhereStatement(): string
     {
-        $result = '';
+        $statement = '';
 
         foreach ($this->where as $condition) {
-            $result .= sprintf(
+            $statement .= sprintf(
                 self::STATEMENT_FORMAT,
                 $condition['column'],
                 $condition['operator'],
@@ -167,10 +167,10 @@ class Builder
             );
 
             // @todo OR対応
-            $result .= ' AND ';
+            $statement .= ' AND ';
         }
 
-        return trim($result, 'AND ');
+        return trim($statement, 'AND ');
     }
 
     private function buildParams(array $params = []): array
