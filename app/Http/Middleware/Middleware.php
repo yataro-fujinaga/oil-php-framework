@@ -11,5 +11,8 @@ use App\Http\Message\Request;
  */
 interface Middleware
 {
+    /**
+     * @param Request $request
+     */
     public function process(Request $request): void;
 }
