@@ -12,7 +12,7 @@ class SampleController implements Controller
 {
     public function __invoke(Request $request, array $args = []): Response
     {
-        $content    = ['message' => 'I am sample response.'];
+        $content    = ['message' => sprintf('test_id is %s.', $args['test_id'])];
         $statusCode = '200';
         $statusText = 'OK';
         $headers    = [];
