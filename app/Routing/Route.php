@@ -73,7 +73,7 @@ class Route
 
         foreach ($this->createTokens($request) as $exploded_uri_pattern => $exploded_uri) {
             if (str_starts_with($exploded_uri_pattern, ':')) {
-                $vars[ltrim($exploded_uri, ':')] = $exploded_uri;
+                $vars[ltrim($exploded_uri_pattern, ':')] = $exploded_uri;
             }
         }
 

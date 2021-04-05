@@ -43,6 +43,7 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route->processable($request)) {
+                // Merge root middleware and global middleware.
                 $route->middleware($this->middlewares);
 
                 return $route->process($request);

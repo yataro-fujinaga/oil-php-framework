@@ -5,6 +5,11 @@ namespace App\Http\Middleware;
 
 use App\Http\Message\Request;
 
+/**
+ * Trait MiddlewareTrait
+ *
+ * @package App\Http\Middleware
+ */
 trait MiddlewareTrait
 {
     /**
@@ -32,6 +37,9 @@ trait MiddlewareTrait
         return $this;
     }
 
+    /**
+     * @param Request $request
+     */
     private function processMiddleware(Request $request): void
     {
         foreach ($this->middlewares as $middleware) {
