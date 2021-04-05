@@ -6,14 +6,16 @@ use App\Http\Message\Request;
 /**
  * Register the Auto Loader
  */
-require "../vendor/autoload.php";
+require __DIR__ . '/../vendor/autoload.php';
 
 /**
- * Select a routing file
+ * Select a routing file.
  */
 //$router = require "../routes/web.php";
-$router = require "../routes/api.php";
+$router = require __DIR__ . '/../routes/api.php';
 
 $kernel = new HttpKernel($router);
 
-$kernel->handle(new Request())->send();
+$response = $kernel->handle(new Request());
+
+$response->send();
