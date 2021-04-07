@@ -29,7 +29,7 @@ class HttpKernel
 
             return $this->router->dispatch($request);
         } catch (\Exception $exception) {
-            exit();
+            var_dump($exception->getMessage());
         }
     }
 }

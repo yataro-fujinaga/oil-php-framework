@@ -6,6 +6,8 @@ namespace App\Routing;
 use App\Http\Message\Request;
 use App\Http\Message\Response;
 use App\Http\Middleware\MiddlewareTrait;
+use Closure;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class Router
@@ -16,18 +18,28 @@ class Router
 {
     use MiddlewareTrait;
 
-    public function __construct(private array $routes = []) {}
+    /**
+     * @var Route[]
+     */
+    private array $routes = [];
 
     /**
-     * @param string          $method
-     * @param string          $pass
-     * @param string|callable $handler
+     * Router constructor.
+     *
+     * @param ContainerInterface $container
+     */
+    public function __construct(private ContainerInterface $container) {}
+
+    /**
+     * @param string         $method
+     * @param string         $pass
+     * @param Closure|string $handler
      *
      * @return Route
      */
-    final public function map(string $method, string $pass, callable|string $handler): Route
+    final public function map(string $method, string $pass, Closure|string $handler): Route
     {
-        $route = new Route($method, $pass, $handler);
+        $route = new Route($this->container, $method, $pass, $handler);
 
         $this->routes[] = $route;
 
