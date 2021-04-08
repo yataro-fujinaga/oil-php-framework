@@ -6,7 +6,7 @@ namespace App\Http\Controller\Api\Sample;
 use App\Http\Controller\Controller;
 use App\Http\Message\Request;
 use App\Http\Message\Response;
-use Packages\Application\User\Create\SampleUseCaseInterface;
+use Packages\Application\Sample\SampleUseCaseInterface;
 
 class SampleController implements Controller
 {
