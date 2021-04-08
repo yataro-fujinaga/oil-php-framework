@@ -3,13 +3,15 @@ declare(strict_types = 1);
 
 namespace Packages\Application\Sample;
 
+use Packages\Domain\Model\Sample\SampleRepository;
+
 class SampleUseCase implements SampleUseCaseInterface
 {
-    public function __construct(private UserRepository $repository)
+    public function __construct(private SampleRepository $repository)
     {
     }
 
-    public function handle(UseCaseRequest $request): UseCaseResponse
+    final public function handle(): void
     {
         // TODO: Implement handle() method.
     }
