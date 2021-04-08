@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use App\Http\HttpKernel;
 use App\Http\Message\Request;
@@ -7,14 +8,11 @@ use App\Http\Message\Request;
  * Register the Auto Loader
  */
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../routes/api.php';
 
-/**
- * Select a routing file.
- */
-//$router = require "../routes/web.php";
-$router = require __DIR__ . '/../routes/api.php';
+$container = require __DIR__ . '/../bootstrap/container.php';
 
-$kernel = new HttpKernel($router);
+$kernel = new HttpKernel(router($container));
 
 $response = $kernel->handle(new Request());
 

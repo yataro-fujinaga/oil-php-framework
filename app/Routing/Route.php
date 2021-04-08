@@ -3,10 +3,11 @@ declare(strict_types = 1);
 
 namespace App\Routing;
 
-use App\Http\Controller\Controller;
 use App\Http\Message\Request;
 use App\Http\Message\Response;
 use App\Http\Middleware\MiddlewareTrait;
+use Psr\Container\ContainerInterface;
+use Closure;
 
 /**
  * Class Route
@@ -17,29 +18,21 @@ class Route
 {
     use MiddlewareTrait;
 
-    private string $method;
-    private string $pass;
-
     /**
-     * @var Controller|callable
+     * Route constructor.
+     *
+     * @param ContainerInterface $container
+     * @param string             $method
+     * @param string             $pass
+     * @param string|Closure     $handler
      */
-    private $handler;
-
-    public function __construct(string $method, string $pass, callable|string $handler)
+    public function __construct(
+        private ContainerInterface $container,
+        private string             $method,
+        private string             $pass,
+        private string|Closure     $handler
+    )
     {
-        $this->method  = $method;
-        $this->pass    = $pass;
-        $this->handler = $this->resolveHandler($handler);
-    }
-
-    private function resolveHandler(callable|string $handler): callable|Controller
-    {
-        if (is_string($handler)) {
-            assert(($controller = new $handler) instanceof Controller);
-            return $controller;
-        }
-
-        return $handler;
     }
 
     final public function processable(Request $request): bool
@@ -77,7 +70,11 @@ class Route
             }
         }
 
-        return call_user_func($this->handler, $request, $vars);
+        $handler = is_string($this->handler)
+            ? $this->container->get($this->handler)
+            : $this->handler;
+
+        return $handler($request, $vars);
     }
 
     /**

@@ -15,6 +15,11 @@ use App\Routing\Router;
  */
 class HttpKernel
 {
+    /**
+     * global middlewares.
+     *
+     * @var string[]
+     */
     private array $middlewares = [
         SampleGlobalMiddleware::class
     ];
@@ -29,7 +34,10 @@ class HttpKernel
 
             return $this->router->dispatch($request);
         } catch (\Exception $exception) {
-            exit();
+            /**
+             * @todo Return error response.
+             */
+            var_dump($exception->getMessage());
         }
     }
 }

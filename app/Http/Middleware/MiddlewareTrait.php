@@ -43,7 +43,7 @@ trait MiddlewareTrait
     private function processMiddleware(Request $request): void
     {
         foreach ($this->middlewares as $middleware) {
-            (new $middleware)->process($request);
+            $this->container->get($middleware)->process($request);
         }
     }
 }
