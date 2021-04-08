@@ -6,7 +6,7 @@
       "Packages\\": "packages/"
     }
   },
-  "name": "tasteck/oil",
+  "name": "task2021/oil",
   "description": "Lightweight web frameworks.",
   "require": {
     "ext-pdo": "*",
