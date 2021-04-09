@@ -3,11 +3,9 @@ declare(strict_types = 1);
 
 namespace App\Container;
 
-use Psr\Container\ContainerInterface;
-
 abstract class ServiceProvider
 {
-    public function __construct(protected ContainerInterface $container)
+    public function __construct(protected Container $container)
     {
     }
 
