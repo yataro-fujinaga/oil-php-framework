@@ -28,16 +28,9 @@ class HttpKernel
 
     final public function handle(Request $request): Response
     {
-        try {
-            // add global middleware.
-            $this->router->middleware($this->middlewares);
+        // add global middleware.
+        $this->router->middleware($this->middlewares);
 
-            return $this->router->dispatch($request);
-        } catch (\Exception $exception) {
-            /**
-             * @todo Return error response.
-             */
-            var_dump($exception->getMessage());
-        }
+        return $this->router->dispatch($request);
     }
 }
