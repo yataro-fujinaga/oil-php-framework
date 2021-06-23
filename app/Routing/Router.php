@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace App\Routing;
 
+use App\Http\Controller\Exception\NotFoundException;
 use App\Http\Message\Request;
 use App\Http\Message\Response;
 use App\Http\Middleware\MiddlewareTrait;
@@ -61,5 +62,7 @@ class Router
                 return $route->process($request);
             }
         }
+
+        throw new NotFoundException('404 Not Found.');
     }
 }
