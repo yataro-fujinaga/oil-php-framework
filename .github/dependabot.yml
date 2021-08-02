@@ -9,5 +9,5 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-    lavels: "dependency"
+    labels: "dependency"
     target-branch: "develop"
