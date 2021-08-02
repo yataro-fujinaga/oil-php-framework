@@ -13,3 +13,5 @@ updates:
       - "composer"
       - "dependencies"
     target-branch: "develop"
+    allow:
+      - dependency-name: "vlucas/phpdotenv"
