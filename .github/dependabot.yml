@@ -14,4 +14,5 @@ updates:
       - "dependencies"
     target-branch: "develop"
     ignore:
-      - dependency-name: "php*"
+      - dependency-name: "container"
+      - dependency-name: "vlucas/phpdotenv"
