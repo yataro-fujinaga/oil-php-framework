@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace App\Http\Middleware;
 
 use App\Http\Message\Request;
+use Psr\Container\ContainerInterface;
 
 /**
  * Trait MiddlewareTrait
@@ -16,6 +17,8 @@ trait MiddlewareTrait
      * @var string[]
      */
     private array $middlewares = [];
+
+    private ContainerInterface $container;
 
     /**
      * Add middleware.

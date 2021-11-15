@@ -3,11 +3,11 @@ declare(strict_types = 1);
 
 namespace App\Providers;
 
-use App\Container\ServiceProvider;
 use Packages\Application\Sample\SampleUseCase;
 use Packages\Application\Sample\SampleUseCaseInterface;
 use Packages\Domain\Model\Sample\SampleRepository;
 use Packages\Port\Adapter\Infrastructure\Sample\SampleRepositoryImpl;
+use ToyContainer\ServiceProvider;
 
 /**
  * Class ApplicationServiceProvider
