@@ -1,10 +1,14 @@
 <?php
 
+use App\Providers\ApplicationServiceProvider;
+use App\Providers\ControllerServiceProvider;
+use App\Providers\MiddlewareServiceProvider;
+
 return [
     /**
      * add ServiceProviders.
      */
-    \App\Providers\ApplicationServiceProvider::class,
-    \App\Providers\ControllerServiceProvider::class,
-    \App\Providers\MiddlewareServiceProvider::class
+    ApplicationServiceProvider::class,
+    ControllerServiceProvider::class,
+    MiddlewareServiceProvider::class
 ];

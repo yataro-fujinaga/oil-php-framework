@@ -3,9 +3,9 @@ declare(strict_types = 1);
 
 namespace App\Providers;
 
-use App\Container\ServiceProvider;
 use App\Http\Controller\Api\Sample\SampleController;
 use Packages\Application\Sample\SampleUseCaseInterface;
+use ToyContainer\ServiceProvider;
 
 /**
  * Class ControllerServiceProvider
