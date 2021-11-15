@@ -13,12 +13,17 @@
         "phpunit/phpunit": "^9.5",
         "vlucas/phpdotenv": "^5.3",
         "psr/container": "^2.0",
-        "oil/toy-container": "^1.0"
+        "oil/toy-container": "^1.0",
+        "oil/toy-or-mapper": "^1.0"
     },
     "repositories": [
         {
             "type": "vcs",
             "url": "git@github.com:tasuku43/toy-container.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:tasuku43/toy-or-maper.git"
         }
     ]
 }
