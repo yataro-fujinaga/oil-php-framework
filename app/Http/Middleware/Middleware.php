@@ -11,6 +11,7 @@ use App\Http\Message\Request;
  */
 interface Middleware
 {
+    // Middlewareの実行処理
     /**
      * @param Request $request
      */
