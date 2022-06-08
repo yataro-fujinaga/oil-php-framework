@@ -15,6 +15,7 @@ use App\Routing\Router;
  */
 class HttpKernel
 {
+    // アプリケーション全体に適用したいMiddlewareの登録
     /**
      * global middlewares.
      *
@@ -29,6 +30,7 @@ class HttpKernel
     final public function handle(Request $request): Response
     {
         // add global middleware.
+        // アプリケーション全体に適用したいMiddlewareの適用
         $this->router->middleware($this->middlewares);
 
         return $this->router->dispatch($request);
