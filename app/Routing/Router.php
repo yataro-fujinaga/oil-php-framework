@@ -40,6 +40,10 @@ class Router
      */
     final public function map(string $method, string $pass, Closure|string $handler): Route
     {
+        // $this->containerはClassのInstance化のための変数
+        // $methodはHTTPリクエストのメソッド（GET、POSTなど）
+        // $passはURIのパス（/index、/articles/createなど）
+        // $handlerは実行する処理(Closure、Controllerで指定）
         $route = new Route($this->container, $method, $pass, $handler);
 
         $this->routes[] = $route;
@@ -57,8 +61,10 @@ class Router
         foreach ($this->routes as $route) {
             if ($route->processable($request)) {
                 // Merge root middleware and global middleware.
+                // routeに適用したいmiddlewareを登録
                 $route->middleware($this->middlewares);
 
+                // requestとパラメータの情報を基にRoutingに対応した処理を実行
                 return $route->process($request);
             }
         }
