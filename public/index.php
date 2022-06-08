@@ -21,8 +21,11 @@ require __DIR__ . '/../bootstrap/handler.php';
 
 $container = require __DIR__ . '/../bootstrap/container.php';
 
+// RoutingのInstance化
 $kernel = new HttpKernel(router($container));
 
+// Routingに対応した処理の実行
 $response = $kernel->handle(new Request());
 
+// responseの送信
 $response->send();
